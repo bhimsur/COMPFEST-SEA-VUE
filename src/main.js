@@ -38,7 +38,7 @@ const router = new VueRouter({
     {
       path: '/appointment',
       name: 'appointment',
-      component: AppointMentIndex
+      component: AppointmentIndex
     },
   ],
   mode: 'history'
