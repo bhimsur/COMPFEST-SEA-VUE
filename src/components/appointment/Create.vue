@@ -67,18 +67,23 @@ export default {
   },
   methods: {
     AppointmentStore(e) {
+      const data = JSON.stringify({
+        doctor_name: this.appointment.doctor_name,
+        description: this.appointment.description,
+      });
       if (this.appointment.doctor_name && this.appointment.description) {
         axios
-          .post(`http://127.0.0.1/appointment`, this.appointment, {
+          .post(`http://127.0.0.1:8081/appointment`, data, {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
             },
           })
           .then(() => {
             this.$router.push({ name: "/appointment" });
           })
           .catch((error) => {
-            console.log(error.response);
+            console.log(error);
           });
       }
       this.erros = [];
