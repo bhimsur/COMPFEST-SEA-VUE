@@ -79,14 +79,24 @@ export default {
   },
   methods: {
     AppointmentUpdate(e) {
-      if (this.appointment.doctor_name && this.appointment.description) {
+      const data = JSON.stringify({
+        id: this.appointment.id,
+        doctor_name: this.appointment.doctor_name,
+        description: this.appointment.description,
+      });
+      if (
+        this.appointment.doctor_name &&
+        this.appointment.description &&
+        this.appointment.id
+      ) {
         axios
           .post(
             `http://127.0.0.1:8081/appointment/${this.$route.params.id}`,
-            this.appointment,
+            data,
             {
               headers: {
                 Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "Content-Type": "application/json",
               },
             }
           )
@@ -95,7 +105,7 @@ export default {
             console.log(response);
           })
           .catch((error) => {
-            console.log(error.response.data.data);
+            console.log(error);
           });
       }
       this.errors = [];

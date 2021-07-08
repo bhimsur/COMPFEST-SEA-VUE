@@ -108,7 +108,7 @@ export default {
             }
           })
           .then(() => {
-            this.$router.push({ name: "/appointment" });
+            this.$router.push({ name: "/login" });
           })
           .then((error) => {
             console.log(error.response);

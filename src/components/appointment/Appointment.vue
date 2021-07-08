@@ -4,7 +4,7 @@
       <div class="row justify-content-center">
         <div class="col-md-12">
           <div class="card">
-            <div class="card-header">Appointment</div>
+            <div class="card-header">Appointment List</div>
             <div class="card-body">
               <router-link
                 :class="['btn btn-md btn-success mb-2']"
@@ -69,9 +69,12 @@
                   </tbody>
                 </table>
                 <hr />
+                <h5 v-if="(user_level == 0) & (applied.length > 0)">
+                  Appointment Status
+                </h5>
                 <table
                   class="table table-hover table-bordered"
-                  v-if="user_level == 0"
+                  v-if="(user_level == 0) & (applied.length > 0)"
                 >
                   <thead>
                     <tr>
@@ -152,18 +155,18 @@ export default {
       this.$router.push({ name: "/login" });
     },
     AppointmentApply(id) {
+      const data = JSON.stringify({
+        id: id,
+      });
       axios
-        .post(`http://127.0.0.1:8081/appointment/apply/${id}`, id, {
+        .post(`http://127.0.0.1:8081/appointment/apply/${id}`, data, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
           },
         })
         .then((response) => {
-          // if (response.data.data.status == 201) {
-          //   this.$router.push({ name: "/appointment" });
-          //   console.log(response.data.data.message);
-          // }
-          // this.applied.push(response.data.data);
+          window.location.reload();
           console.log(response.data);
         })
         .catch((error) => {
