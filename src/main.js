@@ -1,55 +1,61 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import App from './App.vue'
 
 Vue.config.productionTip = false
 
-Vue.use(VueRouter)
+//import vue router
+import VueRouter from 'vue-router'
 
-import AppointmentIndex from './components/appointment/Index'
+Vue.use(VueRouter);
+import 'bootstrap/dist/css/bootstrap.css'
+import 'jquery/dist/jquery.min'
+import 'popper.js/dist/popper.min'
+import 'bootstrap/dist/js/bootstrap.min'
+import './assets/styles/main.css'
+//import component
+import AppointmentIndex from './components/appointment/Appointment'
 import AppointmentCreate from './components/appointment/Create'
 import AppointmentEdit from './components/appointment/Edit'
-
-import AuthLogin from './components/auth/Login'
-import AuthRegister from './components/auth/Register'
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'jquery/dist/jquery.slim'
-import 'popper.js/dist/popper.js'
-import 'bootstrap/dist/js/bootstrap.js'
-
+import AppointmentDetail from './components/appointment/Detail'
+import Login from './components/auth/Login'
+import Register from './components/auth/Register'
 const router = new VueRouter({
   routes: [
     {
+      path: '/login',
+      name: '/login',
+      component: Login
+    },
+    {
       path: '/',
-      name: 'login',
-      component: AuthLogin
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: AuthRegister
-    },
-    {
-      path: '/appointment/create',
-      name: 'create',
-      component: AppointmentCreate
-    },
-    {
-      path: '/appointment/edit/:id',
-      name: 'edit',
-      component: AppointmentEdit
+      name: '/register',
+      component: Register
     },
     {
       path: '/appointment',
-      name: 'appointment',
+      name: '/appointment',
       component: AppointmentIndex
     },
+    {
+      path: '/create',
+      name: '/create',
+      component: AppointmentCreate
+    },
+    {
+      path: '/edit/:id',
+      name: '/edit',
+      component: AppointmentEdit
+    },
+    {
+      path: '/detail/:id',
+      name: '/detail',
+      component: AppointmentDetail
+    }
   ],
   mode: 'history'
 })
 
 new Vue({
   router,
-  render: h => h(App),
+  render: h => h(App)
 }).$mount('#app')
