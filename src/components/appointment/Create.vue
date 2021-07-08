@@ -86,7 +86,7 @@ export default {
             console.log(error);
           });
       }
-      this.erros = [];
+      this.errors = [];
       if (!this.appointment.doctor_name) {
         this.errors.push("Insert Doctor Name.");
       }

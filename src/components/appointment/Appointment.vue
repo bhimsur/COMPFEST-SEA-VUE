@@ -3,6 +3,16 @@
     <div class="container mt-5">
       <div class="row justify-content-center">
         <div class="col-md-12">
+          <div v-if="errors.length">
+            <div
+              v-for="error in errors"
+              :key="error.index"
+              class="alert alert-danger mt-1"
+              role="alert"
+            >
+              {{ error }}
+            </div>
+          </div>
           <div class="card">
             <div class="card-header">Appointment List</div>
             <div class="card-body">
@@ -121,6 +131,7 @@ export default {
       appointments: [],
       user_level: "",
       applied: [],
+      errors: [],
     };
   },
   created() {
@@ -166,8 +177,15 @@ export default {
           },
         })
         .then((response) => {
-          window.location.reload();
-          console.log(response.data);
+          if (response.data.status == 200) {
+            window.location.reload();
+            console.log(response.data);
+          } else if (response.data.status == 400) {
+            this.errors.push(response.data.data);
+            setTimeout(() => {
+              this.errors.pop();
+            }, 2000);
+          }
         })
         .catch((error) => {
           console.log(error.response);
