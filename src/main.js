@@ -13,6 +13,11 @@ import AppointmentEdit from './components/appointment/Edit'
 import AuthLogin from './components/auth/Login'
 import AuthRegister from './components/auth/Register'
 
+import 'bootstrap/dist/css/bootstrap.css'
+import 'jquery/dist/jquery.slim'
+import 'popper.js/dist/popper.js'
+import 'bootstrap/dist/js/bootstrap.js'
+
 const router = new VueRouter({
   routes: [
     {
