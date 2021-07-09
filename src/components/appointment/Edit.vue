@@ -70,7 +70,7 @@ export default {
   created() {
     axios
       .get(
-        `http://127.0.0.1:8081/appointment/${this.$route.params.id}`,
+        `https://compfest-sea-hospital.herokuapp.com/appointment/${this.$route.params.id}`,
         this.appointment
       )
       .then((response) => {
@@ -91,7 +91,7 @@ export default {
       ) {
         axios
           .post(
-            `http://127.0.0.1:8081/appointment/${this.$route.params.id}`,
+            `https://compfest-sea-hospital.herokuapp.com/appointment/${this.$route.params.id}`,
             data,
             {
               headers: {

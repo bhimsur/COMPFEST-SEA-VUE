@@ -99,7 +99,10 @@ export default {
     Register(e) {
       if (this.register) {
         axios
-          .post(`http://127.0.0.1:8081/auth/register`, this.register)
+          .post(
+            `https://compfest-sea-hospital.herokuapp.com/auth/register`,
+            this.register
+          )
           .then((response) => {
             if (localStorage.getItem("token") == null) {
               localStorage.setItem("token", response.data.data.access_token);

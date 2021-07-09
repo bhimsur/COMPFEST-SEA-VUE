@@ -42,7 +42,6 @@
 </template>
 <script>
 import axios from "axios";
-
 export default {
   data() {
     return {
@@ -54,7 +53,11 @@ export default {
     Login(e) {
       if (this.login.username && this.login.password) {
         axios
-          .post(`http://127.0.0.1:8081/auth/login`, this.login)
+          // .post(`http://127.0.0.1:8081/auth/login`, this.login)
+          .post(
+            `https://compfest-sea-hospital.herokuapp.com/auth/login`,
+            this.login
+          )
           .then((response) => {
             if (localStorage.getItem("token") == null) {
               localStorage.setItem("token", response.data.data.access_token);

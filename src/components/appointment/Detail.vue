@@ -48,7 +48,7 @@ export default {
   created() {
     axios
       .get(
-        `http://127.0.0.1:8081/appointment/detail/${this.$route.params.id}`,
+        `https://compfest-sea-hospital.herokuapp.com/appointment/detail/${this.$route.params.id}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         },

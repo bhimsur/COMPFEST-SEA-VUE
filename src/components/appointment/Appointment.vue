@@ -135,12 +135,14 @@ export default {
     };
   },
   created() {
-    axios.get(`http://127.0.0.1:8081/appointment`).then((response) => {
-      this.appointments = response.data.data;
-      this.user_level = localStorage.getItem("user_level");
-    });
     axios
-      .get(`http://127.0.0.1:8081/applied`, {
+      .get(`https://compfest-sea-hospital.herokuapp.com/appointment`)
+      .then((response) => {
+        this.appointments = response.data.data;
+        this.user_level = localStorage.getItem("user_level");
+      });
+    axios
+      .get(`https://compfest-sea-hospital.herokuapp.com/applied`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       })
       .then((response) => {
@@ -150,9 +152,14 @@ export default {
   methods: {
     AppointmentDelete(id, index) {
       axios
-        .delete(`http://127.0.0.1:8081/appointment/${id}`, {
-          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-        })
+        .delete(
+          `https://compfest-sea-hospital.herokuapp.com/appointment/${id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        )
         .then((response) => {
           this.appointments.splice(index, 1);
           console.log(response.data);
@@ -170,12 +177,16 @@ export default {
         id: id,
       });
       axios
-        .post(`http://127.0.0.1:8081/appointment/apply/${id}`, data, {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            "Content-Type": "application/json",
-          },
-        })
+        .post(
+          `https://compfest-sea-hospital.herokuapp.com/appointment/apply/${id}`,
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",
+            },
+          }
+        )
         .then((response) => {
           if (response.data.status == 200) {
             window.location.reload();
@@ -193,7 +204,7 @@ export default {
     },
     AppointmentCancel(id, index) {
       axios
-        .delete(`http://127.0.0.1:8081/patient/${id}`, {
+        .delete(`https://compfest-sea-hospital.herokuapp.com/patient/${id}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         })
         .then((response) => {
