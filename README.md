@@ -2,7 +2,7 @@
 This dashboard wep app made to easily organize doctor appointments for admin and patients<br/>
 Demo app has already been deployed on [this link](https://compfest-sea-vue.vercel.app/)<br/>
 You can login using `username: admin` and `password: admin` to test the admin role<br/>
-You can register to create patient account, or you can also use `username: budi 1` and `password:budi1` to test the patient role<br/>
+You can register to create patient account, or you can also use `username: budi1` and `password:budi1` to test the patient role<br/>
 ✔️ Made with MySQL, FastAPI, Vue CLI, and Bootstrap for more efficient distribution
 ## Features for Administrator
 - List of appointments
