@@ -32,7 +32,11 @@
             placeholder="Enter Password"
             v-model="login.password"
           />
-          <button type="submit" class="btn btn-dark btn-lg btn-block mt-3">
+          <button
+            type="submit"
+            class="btn btn-dark btn-lg btn-block mt-3"
+            :disabled="loginDisabled"
+          >
             Login
           </button>
         </div>
@@ -48,12 +52,14 @@ export default {
     return {
       login: {},
       errors: [],
+      loginDisabled: false,
     };
   },
   methods: {
-    Login(e) {
+    async Login(e) {
       if (this.login.username && this.login.password) {
-        axios
+        this.loginDisabled = true;
+        await axios
           .post(`http://127.0.0.1:8081/auth/login`, this.login)
           .then((response) => {
             if (localStorage.getItem("token") == null) {
@@ -65,6 +71,7 @@ export default {
             }
           })
           .then(() => {
+            this.loginDisabled = false;
             this.$router.push({ name: "/appointment" });
           })
           .catch((error) => {
